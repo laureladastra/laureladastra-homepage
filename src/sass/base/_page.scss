@@ -1,0 +1,107 @@
+/* Basic */
+
+// MSIE: Required for IEMobile.
+@-ms-viewport {
+  width: device-width;
+}
+
+// MSIE: Prevents scrollbar from overlapping content.
+body {
+  -ms-overflow-style: scrollbar;
+}
+
+// Ensures page width is always >=320px.
+@include breakpoint('<=xsmall') {
+  html,
+  body {
+    min-width: 320px;
+  }
+}
+
+// Set box model to border-box.
+// Based on css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background: _palette(bg);
+  overflow-x: hidden;
+
+  // Stops initial animations until page loads.
+  &.is-preload {
+    *,
+    *:before,
+    *:after {
+      @include vendor('animation', 'none !important');
+      @include vendor('transition', 'none !important');
+    }
+  }
+}
+
+// Global Overrides
+
+section {
+  scroll-margin-top: 110px;
+
+  @include breakpoint(('<=medium')) {
+    scroll-margin-top: 50px;
+  }
+  @include breakpoint('<=small') {
+    scroll-margin-top: 50px;
+  }
+}
+
+.toggle-open {
+  padding: 0 0.5rem;
+  font-size: 1.8rem;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+
+  &:hover {
+    color: $white;
+    background-color: _palette(bg);
+  }
+
+  &:active {
+    color: $white;
+    background-color: _palette(bg);
+  }
+
+  &:focus {
+    color: $white;
+    background-color: _palette(bg);
+  }
+}
+
+.toggle-close {
+  background-color: _palette(bg);
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-image: svg-url(
+    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="0 0 64 64" zoomAndPan="disable"><style>line {stroke: #{_palette(fg-bold)};stroke-width: 2px;}</style><line x1="20" y1="20" x2="44" y2="44" /><line x1="20" y1="44" x2="44" y2="20" /></svg>'
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  content: '';
+  cursor: pointer;
+  display: block;
+  height: 4rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 4rem;
+}

@@ -1,0 +1,83 @@
+#!/usr/bin/env pwsh
+
+$htmlFolder = "$(Get-Location -ErrorAction Stop)/html"
+
+function Get-Vulnerabilities {
+  $results = (npm run audit --silent | ConvertFrom-Json -AsHashtable).vulnerabilities
+  $criticalVulnerabilities = @()
+  Write-Host
+  @"
+********************************************************************************
+*                      check vulnerabilities (npm audit)                       *
+********************************************************************************
+"@
+  foreach ($item in $results.keys) {
+    $obj = $results[$item]
+    if ($results[$item].isDirect -eq $true -AND $results[$item].isDirect -ne 'gulp') {
+      $criticalVulnerabilities += $obj
+    }
+  }
+  if ($criticalVulnerabilities) {
+    throw "NPM audit returned critical vulnerabilities alongside 'gulp': $($criticalVulnerabilities.name)"
+    exit 1
+  }
+  Write-Host "done running 'npm run audit'"
+}
+
+function Get-CodeQuality {
+  Write-Host 
+  @"
+********************************************************************************
+*                         check code quality (eslint)                          *
+********************************************************************************
+"@
+  $result = (Invoke-Expression -Command "npm run --silent check -- -f=json" | ConvertFrom-Json)
+  if (($result.errorCount  | Measure-Object -Sum).Sum -ne 0) {
+    Write-Error $result
+    throw  'ESlint did exited with problems'
+  }
+  Write-Host "done running 'npm run check'"
+}
+
+function Get-CodeFormat {
+  Write-Host
+  @"
+********************************************************************************
+*                           check format (prettier)                            *
+********************************************************************************
+"@
+  npm run format
+  Write-Host "done running 'npm run check-format'"
+}
+
+try {
+
+  Write-Host 
+  @"
+********************************************************************************
+*                                HTML APP CHECKS                               *
+********************************************************************************
+********************************************************************************
+*                            check git environment                             *
+********************************************************************************
+"@
+
+  Set-Location $htmlFolder
+  $currentBranch = (git rev-parse --abbrev-ref HEAD)
+  if ($currentBranch -eq 'main') {
+    Write-Warning "you should not commit to 'main' as it will be blocked upstream. please create a feature branch with naming convention feature/name 'git checkout -b feature/name'"
+    exit 1
+  }
+  else {
+    Write-Host "done running 'git rev-parse'"
+  }
+  Get-Vulnerabilities
+  Get-CodeQuality
+  Get-CodeFormat
+  Write-Host
+  @"
+}
+catch {
+  Write-Error $_
+  exit 1
+}

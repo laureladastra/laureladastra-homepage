@@ -1,0 +1,259 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: laureladastra-homepage
+      type: github
+      endpoint: laureladastra
+      name: laureladastra/laureladastra-homepage
+      ref: main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+parameters:
+  - name: htmlversion
+    displayName: HTML version (required)
+    type: string
+    default: latest
+  - name: publish
+    displayName: Publish release (required)
+    default: false
+    values:
+      - true
+      - false
+  - name: prerelease
+    displayName: Pre-release (optional)
+    default: false
+    values:
+      - true
+      - false
+  - name: version
+    displayName: Release version (required)
+    type: string
+    default: 'null'
+  - name: author
+    displayName: Release author (optional)
+    type: string
+    default: laureladastra
+
+variables:
+  - name: env_htmlFolder
+    value: '$(Pipeline.Workspace)/html'
+  - name: env_testFolder
+    value: '$(Pipeline.Workspace)/test'
+  - name: cmdb_applicationRepository
+    value: 'https://github.com/laureladastra/laureladastra-homepage'
+  - name: cmdb_applicationName
+    value: 'laureladastra.homepage'
+  - name: cmdb_applicationDescription
+    value: 'This project contains resources for the laureladastra.com website'
+  - name: cmdb_applicationOwner
+    value: 'laure.kamalandua@quantaleap.eu'
+
+stages:
+  - stage: Development
+    variables:
+      - group: laureladastra-homepage
+    jobs:
+      - job: DeployInfrastructure
+        displayName: Deploy infrastructure
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: 'ARM Template Deployment: Static Website'
+            inputs:
+              azureResourceManagerConnection: 'quantaleap production'
+              subscriptionId: '$(subscription)'
+              resourceGroupName: '$(resourceGroup)'
+              location: '$(location)'
+              csmFile: '$(System.DefaultWorkingDirectory)/release/templates/static.webapp.json'
+              overrideParameters: '-name "$(name)" -location "$(location)" -sku "$(sku)" -skuCode "$(skuCode)" -appLocation $(appLocation) -workspaceId "$(workspaceId)" -appInsightsName "$(appInsightsName)"'
+              deploymentName: '$(Build.BuildNumber)'
+          - task: AzureCLI@2
+            name: tagResources
+            displayName: Tag resources/Set variables
+            inputs:
+              azureSubscription: 'quantaleap production'
+              scriptType: pscore
+              scriptLocation: inlineScript
+              failOnStandardError: false
+              inlineScript: |
+                echo "updating tags on resources"
+
+                $tag = @{
+                  "repository"             = "$(cmdb_applicationRepository)";
+                  "applicationOwner"       = "$(cmdb_applicationOwner)";
+                  "applicationName"        = "$(cmdb_applicationName)";
+                  "applicationDescription" = "$(cmdb_applicationDescription)";
+                }
+
+                echo "##[command]az resource list --resource-group ***"
+                $resources = (az resource list --resource-group $(resourceGroup) | ConvertFrom-Json)
+                $resources += (az group show --name $(resourceGroup) | ConvertFrom-Json)
+                foreach ($item in $resources) {
+                  az tag create --resource-id $($item.id) --tags `
+                    repository=$($tag.repository) `
+                    applicationOwner=$($tag.applicationOwner) `
+                    applicationName=$($tag.applicationName) `
+                    applicationDescription=$($tag.applicationDescription)
+                }
+
+                echo "setting environment variables"
+                $auth = (az resource show --resource-group $(resourceGroup) --name $(appInsightsName) --resource-type "microsoft.insights/components" --query "properties.InstrumentationKey")
+                az staticwebapp appsettings set --name $(name) --resource-group $(resourceGroup) --setting-names `
+                APPINSIGHTS_INSTRUMENTATIONKEY=$auth
+          - task: AzureCLI@2
+            name: setToken
+            displayName: 'Save deployment token'
+            inputs:
+              azureSubscription: 'quantaleap production'
+              scriptType: pscore
+              scriptLocation: inlineScript
+              failOnStandardError: false
+              inlineScript: |
+                $token = ((az staticwebapp secrets list --name $(name) --resource-group $(resourceGroup) --subscription $(subscription)) | ConvertFrom-Json).properties.apiKey
+                echo "updated app deployment settings"
+                echo "##vso[task.setvariable variable=token;isOutput=true;]$token"
+
+                echo "##[command]az staticwebapp environment list"
+                $hostName = ((az staticwebapp environment list --name $(name) --resource-group $(resourceGroup) --subscription $(subscription) | ConvertFrom-Json).Where{$_.buildId -eq "default"}).hostName
+
+                echo "updating pipeline environment variables ..."
+
+                echo "##[command]az pipelines variable-group variable update"
+                echo $(System.AccessToken) | az devops login --organization https://dev.azure.com/quantaleap
+                az pipelines variable-group variable update --group-id $(id) `
+                  --name FUNCTIONAPP_URI `
+                  --value $hostName `
+                  --org https://dev.azure.com/quantaleap `
+                  --project "Product Development"
+
+                 az pipelines variable-group variable update --group-id $(id) `
+                  --name token `
+                  --value $token `
+                  --secret `
+                  --org https://dev.azure.com/quantaleap `
+                  --project "Product Development"
+
+      - job: PublishCode
+        displayName: Publish code
+        dependsOn: DeployInfrastructure
+        condition: succeeded()
+        variables:
+          token: $[ dependencies.DeployInfrastructure.outputs['setToken.token'] ]
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Copy HTML Files'
+            inputs:
+              buildType: specific
+              buildId: ${{ parameters.htmlversion }}
+              project: '6206cff7-06ac-401d-988d-bf459fd9dedb'
+              pipeline: $(pipelineHTML)
+              artifact: html
+              downloadPath: '$(Pipeline.Workspace)'
+          - script: docker pull mcr.microsoft.com/appsvc/staticappsclient:stable
+            displayName: 'Pull latest image (SWA)'
+          - task: AzureStaticWebApp@0
+            displayName: 'Static Web App: $(name)'
+            env:
+              SWA_CLI_APP_NAME: '$(name)'
+              AZURE_RESOURCE_GROUP: '$(resourceGroup)'
+              AZURE_SUBSCRIPTION_ID: '$(subscription)'
+              AZURE_REGION_LOCATION: '$(location)'
+            inputs:
+              deployment_environment: 'Development'
+              production_branch: main
+              workingDirectory: $(Pipeline.Workspace)
+              app_location: '/'
+              config_file_location: ''
+              skip_app_build: true
+              skip_api_build: true
+              is_static_export: true
+              verbose: true
+              azure_static_web_apps_api_token: '$(token)'
+
+  - stage: Acceptance
+    dependsOn: Development
+    condition: succeeded()
+    jobs:
+      - job: ReviewUX
+        pool: server
+        displayName: Review UI/UX
+        timeoutInMinutes: 1440
+        steps:
+          - task: ManualValidation@0
+            timeoutInMinutes: 300
+            inputs:
+              notifyUsers: |
+                - [Product Development]\Product Development Team
+                - productdevelopment@quantaleap.eu
+                - productdevelopment@quantaleap.onmicrosoft.com
+              instructions: 'Please complete the following review steps:  1. Check release for functional and/or technical shortcomings in the development environment. - 2. Verify whether release notes have been updated at ./.RELEASE.md - 3. Check whether custom domain is validated and set as default.'
+              onTimeout: 'reject'
+      - job: CreateRelease
+        displayName: Create release
+        dependsOn: ReviewUX
+        condition: and(succeeded(), eq('${{ parameters.publish }}', 'true'))
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+          - task: GitHubRelease@1
+            displayName: 'Create Github release'
+            inputs:
+              gitHubConnection: ${{ parameters.author }}
+              tagSource: userSpecifiedTag
+              releaseNotesFilePath: '$(System.DefaultWorkingDirectory)/RELEASE.md'
+              isPreRelease: ${{ parameters.prerelease }}
+              tag: ${{ parameters.version }}
+              title: 'v${{ parameters.version }}'
+
+  - stage: Production
+    dependsOn: Acceptance
+    condition: succeeded()
+    variables:
+      - group: laureladastra-homepage
+    jobs:
+      - deployment: PublishCode
+        displayName: Publish code
+        environment: laureladastra-homepage-production
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                  clean: true
+                  persistCredentials: true
+                - task: DownloadPipelineArtifact@2
+                  displayName: 'Copy HTML Files'
+                  inputs:
+                    buildType: specific
+                    buildId: ${{ parameters.htmlversion }}
+                    project: '6206cff7-06ac-401d-988d-bf459fd9dedb'
+                    pipeline: $(pipelineHTML)
+                    artifact: html
+                    downloadPath: '$(Pipeline.Workspace)'
+                - script: docker pull mcr.microsoft.com/appsvc/staticappsclient:stable
+                  displayName: 'Pull latest image (SWA)'
+                - task: AzureStaticWebApp@0
+                  displayName: 'Static Web App: $(name)'
+                  env:
+                    SWA_CLI_APP_NAME: '$(name)'
+                    AZURE_RESOURCE_GROUP: '$(resourceGroup)'
+                    AZURE_SUBSCRIPTION_ID: '$(subscription)'
+                    AZURE_REGION_LOCATION: '$(location)'
+                  inputs:
+                    workingDirectory: $(Pipeline.Workspace)
+                    app_location: '/'
+                    skip_app_build: true
+                    skip_api_build: true
+                    is_static_export: true
+                    verbose: true
+                    azure_static_web_apps_api_token: '$(token)'
+                    production_branch: main
