@@ -1,5 +1,4 @@
 # Changes
 ## Features
 
-- added initial site assets
-- added initial release pipeline
+- updated `README.md`
