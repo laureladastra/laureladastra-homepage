@@ -31,7 +31,7 @@ Install the required software and run the installation script at `release/hooks/
 The project is a generic HTML front-end with minimal dependencies (`Bootstrap 5.0` & `jQuery`) + SASS for styling.:
 
 ``` markdown
-* functionapp
+*
 ├─ css
 ├─ img
 ├─ js
