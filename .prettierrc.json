@@ -1,0 +1,29 @@
+{
+  "vueIndentScriptAndStyle": false,
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "printWidth": 80,
+  "semi": false,
+  "singleQuote": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "overrides": [
+    {
+      "files": ["**/*.css"],
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": ["**/*.yaml"],
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "**/*.ps1",
+      "options": {
+        "parser": "powershell"
+      }
+    }
+  ]
+}

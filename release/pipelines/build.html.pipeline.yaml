@@ -1,0 +1,108 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '/'
+
+pr:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Environment variables for the pipeline job
+  - name: System.Debug
+    value: true
+  - name: env_testFolder
+    value: '$(Build.SourcesDirectory)/test'
+  - name: env_htmlFolder
+    value: '$(Build.SourcesDirectory)'
+
+jobs:
+  - job: ConfigureBuild
+    displayName: Configure build details
+    steps:
+      - script: |
+          cd $(env_htmlFolder)
+          version=$(node -p "require('./package.json').version")
+          description=$(node -p "require('./package.json').description")
+          echo "##vso[task.setvariable variable=cmdb_applicationVersion;isoutput=true]$version"
+          echo "##vso[task.setvariable variable=cmdb_applicationDescription;isoutput=true]$description"
+          echo "##vso[build.updatebuildnumber]$(Build.BuildNumber)-v$version"
+        displayName: Update build metadata
+        name: variableSet
+  - job: RunSecurityTest
+    dependsOn: ConfigureBuild
+    condition: succeeded()
+    displayName: Run QA & security tests
+    steps:
+      - script: |
+          mkdir -p '$(env_testFolder)/results/'
+          npm install --only=dev --no-fund --silent
+          npm run check --silent -- -f="junit" > $(env_testFolder)/results/eslint.qa.results.xml
+        displayName: Run code quality test
+        workingDirectory: $(env_htmlFolder)
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        displayName: Publish ESLint results
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/*/eslint.qa.results.xml'
+          failTaskOnFailedTests: true
+          testRunTitle: 'ESLint QA'
+      - pwsh: |
+          $results = (npm run audit --silent | ConvertFrom-Json -AsHashtable).vulnerabilities
+          $criticalVulnerabilities = @()
+
+          foreach ($item in $results.keys) {
+            $obj = $results[$item]
+            if ($results[$item].isDirect -eq $true -AND $results[$item].isDirect -ne 'gulp') {
+              $criticalVulnerabilities += $obj
+            }
+          }
+
+          if ($criticalVulnerabilities) {
+            echo "##[warning]$criticalVulnerabilities"
+            throw "NPM audit returned critical vulnerabilities alongside 'gulp': $($criticalVulnerabilities.name)"
+            exit 1
+          }
+        displayName: Run vulnerability test
+        workingDirectory: $(env_htmlFolder)
+  - job: CreateBuild
+    dependsOn:
+      - ConfigureBuild
+      - RunSecurityTest
+    displayName: Publish build artifacts
+    variables:
+      System.Debug: true
+      cmdb_applicationVersion: $[ dependencies.ConfigureBuild.outputs['variableSet.cmdb_applicationVersion'] ]
+    steps:
+      - script: |
+          export NODE_ENV=development
+          mkdir -p $(System.DefaultWorkingDirectory)/build/
+          dir
+          npm install --no-fund --silent
+          npm run build
+        displayName: Build artifacts
+        workingDirectory: $(env_htmlFolder)
+      - script: |
+          directory=$(Build.StagingDirectory)/html/
+          echo "Cleaning staging directory"
+          rm -rf $(Build.StagingDirectory)/*
+          mkdir -p $directory
+          cp -v -r $(env_htmlFolder)/build/. $directory
+        displayName: 'Copy files'
+        workingDirectory: $(env_htmlFolder)
+      - task: PublishPipelineArtifact@1
+        displayName: Store build artifacts
+        inputs:
+          targetPath: '$(Build.StagingDirectory)/html/'
+          artifactName: 'html'

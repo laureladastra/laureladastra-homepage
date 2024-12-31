@@ -1,0 +1,41 @@
+{
+  "name": "laureladastra.com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "audit": "npm audit -audit-level=critical -json",
+    "watch": "npx sass --watch ./src/sass/main.scss ./src/css/main.css --quiet",
+    "build": "npx sass ./src/sass/main.scss ./src/css/main.css --quiet && npx grunt build",
+    "check": "npx eslint --no-warn-ignored",
+    "format": "npx prettier --write .",
+    "pester": "pwsh -ExecutionPolicy Unrestricted -Command \"Invoke-Pester './test -Show All\""
+  },
+  "author": "Laure Ladastra",
+  "license": "UNLICENSED",
+  "description": "This project contains all the resources that support laureladastra.com.",
+  "devDependencies": {
+    "@eslint/compat": "^1.2.4",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-formatter-junit": "^8.40.0",
+    "eslint-plugin-html": "^8.1.2",
+    "eslint-plugin-jquery": "^1.5.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.14.0",
+    "grunt": "^1.6.1",
+    "grunt-cli": "^1.5.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^5.0.1",
+    "grunt-text-replace": "^0.4.0",
+    "include-all": "^4.0.3",
+    "prettier": "^3.4.2",
+    "run": "^1.5.0",
+    "sass": "^1.83.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

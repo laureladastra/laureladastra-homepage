@@ -1,0 +1,216 @@
+/* Basic */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+// Change selection color
+
+::-webkit-selection {
+  color: _palette(fg);
+  background: _palette(fg-bold);
+}
+
+::-moz-selection {
+  color: _palette(fg);
+  background: _palette(fg-bold);
+}
+
+::selection {
+  color: _palette(fg);
+  background: _palette(fg-bold);
+}
+
+// MSIE: Required for IEMobile.
+@-ms-viewport {
+  width: device-width;
+}
+
+// MSIE: Prevents scrollbar from overlapping content.
+body {
+  -ms-overflow-style: scrollbar;
+}
+
+// Ensures page width is always >=320px.
+@include breakpoint('<=xsmall') {
+  html,
+  body {
+    min-width: 320px;
+  }
+}
+
+// Set box model to border-box.
+// Based on css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background: _palette(bg);
+  overflow-x: hidden;
+
+  // Stops initial animations until page loads.
+  &.is-preload {
+    *,
+    *:before,
+    *:after {
+      @include vendor('animation', 'none !important');
+      @include vendor('transition', 'none !important');
+    }
+  }
+}
+
+// Global Overrides
+
+section {
+  scroll-margin-top: 110px;
+
+  @include breakpoint(('<=medium')) {
+    scroll-margin-top: 50px;
+  }
+
+  @include breakpoint('<=small') {
+    scroll-margin-top: 50px;
+  }
+
+  @include breakpoint('<=xxxsmall') {
+    scroll-margin-top: 15px;
+  }
+}
+
+.toggle-open {
+  padding: 0 0.5rem;
+  font-size: 1.8rem;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+
+  &:hover {
+    color: $white;
+    background-color: transparent;
+  }
+
+  &:active {
+    color: $white;
+    background-color: transparent;
+  }
+
+  &:focus {
+    color: $white;
+    background-color: transparent;
+  }
+}
+
+.toggle-close {
+  z-index: 100;
+  background-color: transparent;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-image: svg-url(
+    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="0 0 64 64" zoomAndPan="disable"><style>line {stroke: #{_palette(fg-bold)};stroke-width: 2px;}</style><line x1="20" y1="20" x2="44" y2="44" /><line x1="20" y1="44" x2="44" y2="20" /></svg>'
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  content: '';
+  cursor: pointer;
+  display: block;
+  height: 4rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 4rem;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+// Modal
+// TODO (check whether port to SASS is possible)
+
+.modal-content {
+  text-align: center;
+  background-color: black;
+}
+
+.modal-title {
+  white-space: unset;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @include breakpoint('<=small') {
+    max-width: 88%;
+  }
+}
+
+.modal-flex-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+
+    @include breakpoint('<=xxxsmall') {
+      text-align: left;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.modal-body {
+  video {
+    text-align: center;
+    z-index: 1;
+    margin-top: 20%;
+    width: 50%;
+    height: 50%;
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+
+  @include breakpoint('<=small') {
+    font-size: 1.2rem;
+  }
+}
+
+#modal6 .modal-content {
+  a:hover {
+    color: _palette(fg-bold);
+  }
+  background-color: transparent;
+  border: none;
+}
+
+#navbarNav {
+  // FIXME navbar cannot be scrolled in this viewport size
+  @include breakpoint('<=xxxsmall') {
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "appInsightsName": {
+    "description": "Name for the Azure Application Insights resource (friendly)",
+    "example": "application-logs"
+  },
+  "appLocation": {
+    "description": "Location for the index of the application. Used as configuration for the web server to determine where to source files from.",
+    "example": "/"
+  },
+  "domain": {
+    "description": "Domain of the website",
+    "example": "yourwebsite.com"
+  },
+  "FUNCTIONAPP_URI": {
+    "description": "Eventual URL of the web application on Azure",
+    "example": "yourwebsite.azurewebsites.net"
+  },
+  "id": {
+    "description": "Identifier of the Azure DevOps variable group (library).",
+    "example": 1
+  },
+  "location": {
+    "description": "Datacentre location for the Azure resources.",
+    "example": "westeurope"
+  },
+  "name": {
+    "description": "Name for the Azure Static Web App.",
+    "example": "yourwebsite"
+  },
+  "pipelineHTML": {
+    "description": "Name of the Azure DevOps pipeline that produces the build artifacts.",
+    "example": "mybuildpipeline-html"
+  },
+  "subscription": {
+    "description": "GUID of the Azure subscription where the resources should be deployed.",
+    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  },
+  "token": {
+    "description": "Token that is used to deploy resources to the web server (Azure Static Apps).",
+    "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  },
+  "workspaceId": {
+    "description": "Fully qualified resource name for the Application Insights that will host the logging of the application.",
+    "example": "/subscriptions/X/resourceGroups/X/providers/microsoft.operationalinsights/workspaces/X"
+  },
+  "resourceGroup": {
+    "description": "Resource group name for the Azure resources.",
+    "example": "myazresourcegroup"
+  },
+  "serviceConnection": {
+    "description": "Name of the Azure DevOps service connection that grants access to a Service Principal to connect to Azure.",
+    "example": "myprodsubscription"
+  },
+  "sku": {
+    "description": "sku for the Azure Static Web App.",
+    "example": "Standard"
+  },
+  "skuCode": {
+    "description": "skuCode for the Azure Static Web App.",
+    "example": "Standard"
+  }
+}
+

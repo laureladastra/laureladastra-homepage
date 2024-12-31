@@ -1,0 +1,72 @@
+#!/usr/bin/env pwsh
+
+$htmlFolder = "$(Get-Location -ErrorAction Stop)/"
+
+function Get-Vulnerabilities {
+  $results = (npm run audit --silent | ConvertFrom-Json -AsHashtable).vulnerabilities
+  $criticalVulnerabilities = @()
+  Write-Host
+  @"
+********************************************************************************
+*                      check vulnerabilities (npm audit)                       *
+********************************************************************************
+"@
+  foreach ($item in $results.keys) {
+    $obj = $results[$item]
+    if ($results[$item].isDirect -eq $true -AND $results[$item].isDirect -ne 'gulp') {
+      $criticalVulnerabilities += $obj
+    }
+  }
+  if ($criticalVulnerabilities) {
+    throw "NPM audit returned critical vulnerabilities alongside 'gulp': $($criticalVulnerabilities.name)"
+    exit 1
+  }
+  Write-Host "done running 'npm run audit'"
+}
+
+function Get-CodeQuality {
+  Write-Host 
+  @"
+********************************************************************************
+*                         check code quality (eslint)                          *
+********************************************************************************
+"@
+  $result = (Invoke-Expression -Command "npm run --silent check -- -f=json" | ConvertFrom-Json)
+  $errors = @()
+  $errorCount = $null
+
+  foreach ($item in $result) {
+    if ($item.errorCount -gt 0) {
+      $errors += $item
+    }
+  }
+
+  $errorCount = $errors.Count
+
+  if ($errorCount -gt 0)  {
+    for ($i = 0; $i -lt $errorCount.length; $i++) {
+      Write-Warning -Message "Path: $($errors[$i].filePath)`nMessage: $($errors[$i].messages | ConvertTo-Json -Depth 10 -Compress)"
+    }
+    throw  "ESlint exited with $($errorCount) problem(s)"
+  }
+  Write-Host "done running 'npm run check'"
+}
+
+try {
+  Write-Host 
+  @"
+********************************************************************************
+*                                HTML APP CHECKS                               *
+********************************************************************************
+********************************************************************************
+*                            check git environment                             *
+********************************************************************************
+"@
+  Set-Location $htmlFolder
+  Get-Vulnerabilities
+  Get-CodeQuality
+}
+catch {
+  Write-Error $_
+  exit 1
+}

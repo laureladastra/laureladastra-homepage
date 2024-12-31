@@ -1,0 +1,17 @@
+# ignore config files
+eslint.config.mjs
+
+# ignore project folders
+build
+node_modules
+webfonts
+src-backup
+release/pipelines
+vendors
+
+# ignore specific file types
+*.min.*
+*.ps1
+*.css
+*.yml
+*.yaml
