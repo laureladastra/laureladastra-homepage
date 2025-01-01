@@ -16,13 +16,13 @@ This project contains all the resources that support [laureladastra.com](https:/
 
 The following software packages are required to contribute to this project:
 
-- Node.js/npm version `>=22.3.0` and `>=10.8.1`
+- Node.js/NPM version `>=22.3.0` and `>=10.8.1`
 - PowerShell Core version `>=7.2.7`
 
 Install the following software to get started with contributing:
 
-- [Node.js/npm version](https://nodejs.org/en/)
-- [PowerShell Core](https://github.com/PowerShell/PowerShell) version `>=7.0.0`
+- [Node.js/NPM](https://nodejs.org/en/)
+- [PowerShell Core](https://github.com/PowerShell/PowerShell)
 
 ### Installation
 
@@ -30,7 +30,7 @@ Install the required software and run the installation script at `release/hooks/
 
 ### Project Structure
 
-The project is a generic HTML front-end with minimal dependencies (`Bootstrap 5.0` & `jQuery`) + SASS for styling.:
+The project is a generic HTML front-end with minimal dependencies (`Bootstrap 5.0` & `jQuery`) + SASS for styling:
 
 ```markdown
 *
