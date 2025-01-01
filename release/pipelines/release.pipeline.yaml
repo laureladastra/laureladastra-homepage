@@ -50,7 +50,7 @@ variables:
   - name: cmdb_applicationDescription
     value: 'This project contains resources for the laureladastra.com website'
   - name: cmdb_applicationOwner
-    value: 'laure.kamalandua@quantaleap.eu'
+    value: 'laure.ladastra@ladastra.co'
 
 stages:
   - stage: Development
