@@ -314,9 +314,9 @@ hr {
 
 #socials li a {
   background-color: transparent;
-  color: $white;
+  color: $white !important;
   &:hover {
-    color: $gray-700;
+    color: $gray-700 !important;
   }
 }
 

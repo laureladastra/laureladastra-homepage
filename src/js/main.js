@@ -205,11 +205,7 @@ $(function () {
     const $this = $(e.target)
     const width = $(window).width()
 
-    // Revert default color for links in #icon
-
-    if ($this.is('a') && $this.hasClass('icon')) {
-      $this.blur()
-    }
+    // Toggle small navigation menu
 
     if (width < 992) {
       if (
