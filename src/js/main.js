@@ -1,6 +1,7 @@
 $(function () {
   const $window = $(window),
-    $body = $('body')
+    $body = $('body'),
+    $agent = navigator.userAgent
 
   // Breakpoints.
   breakpoints({
@@ -69,6 +70,17 @@ $(function () {
       // Hide img.
       $img.css('opacity', '0')
     })
+  }
+
+  // Hack: includes activation of autoplay to prevent bugs on in-app experience
+  // FIXME patch is limited to iOS
+  // additional testing required to check compatibility with AndroidOS/Windows Mobile
+
+  if (!/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test($agent)) {
+    const videos = $('#intro video')
+    for (let i = 0; i < videos.length; i++) {
+      $(videos[i]).prop('autoplay', true)
+    }
   }
 
   // Gallery.
@@ -284,12 +296,10 @@ $(function () {
   })
 
   /* Modal */
-  // Hack: includes activation of autoplay to prevent bugs on in-app experiences
 
   $(document).on('show.bs.modal', function (e) {
     const video = $(e.target).find('video')
     const width = $(window).width()
-    video.prop('autoplay', true)
 
     if (width > 224) {
       $('html').css('overflow', 'hidden')
@@ -302,7 +312,6 @@ $(function () {
   $(document).on('hide.bs.modal', function (e) {
     const video = $(e.target).find('video')
     const width = $(window).width()
-    video.prop('autoplay', false)
 
     if (width > 224) {
       const $this = $('html')
