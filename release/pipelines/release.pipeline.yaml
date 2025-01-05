@@ -71,7 +71,7 @@ stages:
               resourceGroupName: '$(resourceGroup)'
               location: '$(location)'
               csmFile: '$(System.DefaultWorkingDirectory)/release/templates/static.webapp.json'
-              overrideParameters: '-name "$(name)" -location "$(location)" -sku "$(sku)" -skuCode "$(skuCode)" -appLocation $(appLocation) -workspaceId "$(workspaceId)" -appInsightsName "$(appInsightsName)"'
+              overrideParameters: '-name "$(name)" -location "$(location)" -sku "$(sku)" -skuCode "$(skuCode)" -appLocation $(appLocation)'
               deploymentName: '$(Build.BuildNumber)'
           - task: AzureCLI@2
             name: tagResources
@@ -101,11 +101,6 @@ stages:
                     applicationName=$($tag.applicationName) `
                     applicationDescription=$($tag.applicationDescription)
                 }
-
-                echo "setting environment variables"
-                $auth = (az resource show --resource-group $(resourceGroup) --name $(appInsightsName) --resource-type "microsoft.insights/components" --query "properties.InstrumentationKey")
-                az staticwebapp appsettings set --name $(name) --resource-group $(resourceGroup) --setting-names `
-                APPINSIGHTS_INSTRUMENTATIONKEY=$auth
           - task: AzureCLI@2
             name: setToken
             displayName: 'Save deployment token'

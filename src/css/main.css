@@ -13249,10 +13249,10 @@ hr.major {
 
 #socials li a {
   background-color: transparent;
-  color: #fff;
+  color: #fff !important;
 }
 #socials li a:hover {
-  color: #495057;
+  color: #495057 !important;
 }
 
 #appointments-content a {

@@ -36,6 +36,7 @@
     "sass": "^1.83.0"
   },
   "dependencies": {
+    "@types/jquery": "^3.5.32",
     "bootstrap": "^5.3.3"
   }
 }

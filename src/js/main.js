@@ -1,6 +1,6 @@
 $(function () {
-  const $window = $(window)
-  const $body = $('body')
+  const $window = $(window),
+    $body = $('body')
 
   // Breakpoints.
   breakpoints({
@@ -224,6 +224,38 @@ $(function () {
         }
       }
     }
+
+    // Toggle small navigation menu
+
+    if (width < 992) {
+      if (
+        $('#navbarNav').hasClass('collapse') &&
+        $('#navbarNav').hasClass('show')
+      ) {
+        closeNavBar()
+        toggleButton('off')
+      } else if ($this.hasClass('signature')) {
+        if ($('#navbar-button').hasClass('collapsed')) {
+          toggleButton('off')
+        }
+      }
+    }
+
+    // Toggle small navigation menu
+
+    if (width < 992) {
+      if (
+        $('#navbarNav').hasClass('collapse') &&
+        $('#navbarNav').hasClass('show')
+      ) {
+        closeNavBar()
+        toggleButton('off')
+      } else if ($this.hasClass('signature')) {
+        if ($('#navbar-button').hasClass('collapsed')) {
+          toggleButton('off')
+        }
+      }
+    }
   })
 
   // Display correct navigation menu state and toggle icon based
@@ -252,10 +284,12 @@ $(function () {
   })
 
   /* Modal */
+  // Hack: includes activation of autoplay to prevent bugs on in-app experiences
 
   $(document).on('show.bs.modal', function (e) {
     const video = $(e.target).find('video')
     const width = $(window).width()
+    video.prop('autoplay', true)
 
     if (width > 224) {
       $('html').css('overflow', 'hidden')
@@ -268,6 +302,7 @@ $(function () {
   $(document).on('hide.bs.modal', function (e) {
     const video = $(e.target).find('video')
     const width = $(window).width()
+    video.prop('autoplay', false)
 
     if (width > 224) {
       const $this = $('html')

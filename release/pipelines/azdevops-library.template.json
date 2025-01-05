@@ -1,8 +1,4 @@
 {
-  "appInsightsName": {
-    "description": "Name for the Azure Application Insights resource (friendly)",
-    "example": "application-logs"
-  },
   "appLocation": {
     "description": "Location for the index of the application. Used as configuration for the web server to determine where to source files from.",
     "example": "/"
@@ -38,10 +34,6 @@
   "token": {
     "description": "Token that is used to deploy resources to the web server (Azure Static Apps).",
     "example": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-  },
-  "workspaceId": {
-    "description": "Fully qualified resource name for the Application Insights that will host the logging of the application.",
-    "example": "/subscriptions/X/resourceGroups/X/providers/microsoft.operationalinsights/workspaces/X"
   },
   "resourceGroup": {
     "description": "Resource group name for the Azure resources.",
