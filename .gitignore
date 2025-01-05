@@ -111,5 +111,5 @@ __azurite_db*__.json
 *.icloud
 *.DS_Store
 
-Windows files
+#Windows files
 *Thumbs.db

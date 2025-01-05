@@ -1,6 +1,7 @@
 $(function () {
-  const $window = $(window)
-  const $body = $('body')
+  const $window = $(window),
+    $body = $('body')
+  // $agent = $('#UserAgent').val(navigator.userAgent)
 
   // Breakpoints.
   breakpoints({
@@ -199,11 +200,33 @@ $(function () {
     })
   }
 
+  // Hack: disable autoplay for in-app browsers
+
   // Listeners
 
   $(document).on('click', (e) => {
     const $this = $(e.target)
     const width = $(window).width()
+
+    // Revert default color for links in #icon
+
+    if ($this.is('a') && $this.hasClass('icon')) {
+      $this.blur()
+    }
+
+    if (width < 992) {
+      if (
+        $('#navbarNav').hasClass('collapse') &&
+        $('#navbarNav').hasClass('show')
+      ) {
+        closeNavBar()
+        toggleButton('off')
+      } else if ($this.hasClass('signature')) {
+        if ($('#navbar-button').hasClass('collapsed')) {
+          toggleButton('off')
+        }
+      }
+    }
 
     // Toggle small navigation menu
 
