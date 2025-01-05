@@ -1,7 +1,6 @@
 $(function () {
   const $window = $(window),
     $body = $('body')
-  // $agent = $('#UserAgent').val(navigator.userAgent)
 
   // Breakpoints.
   breakpoints({
@@ -200,8 +199,6 @@ $(function () {
     })
   }
 
-  // Hack: disable autoplay for in-app browsers
-
   // Listeners
 
   $(document).on('click', (e) => {
@@ -287,10 +284,12 @@ $(function () {
   })
 
   /* Modal */
+  // Hack: includes activation of autoplay to prevent bugs on in-app experiences
 
   $(document).on('show.bs.modal', function (e) {
     const video = $(e.target).find('video')
     const width = $(window).width()
+    video.prop('autoplay', true)
 
     if (width > 224) {
       $('html').css('overflow', 'hidden')
@@ -303,6 +302,7 @@ $(function () {
   $(document).on('hide.bs.modal', function (e) {
     const video = $(e.target).find('video')
     const width = $(window).width()
+    video.prop('autoplay', false)
 
     if (width > 224) {
       const $this = $('html')
