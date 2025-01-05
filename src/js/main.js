@@ -77,7 +77,7 @@ $(function () {
   // additional testing required to check compatibility with AndroidOS/Windows Mobile
 
   if (!/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test($agent)) {
-    const videos = $('#intro video')
+    const videos = $('#facts video')
     for (let i = 0; i < videos.length; i++) {
       $(videos[i]).prop('autoplay', true)
     }
@@ -303,9 +303,7 @@ $(function () {
 
     if (width > 224) {
       $('html').css('overflow', 'hidden')
-      if (width > 992) {
-        video.trigger('play')
-      }
+      video.trigger('play')
     }
   })
 
@@ -317,10 +315,7 @@ $(function () {
       const $this = $('html')
       $this.css('overflow', 'unset')
       $this.css('overflow-x', 'hidden')
-
-      if (width > 992) {
-        video.trigger('pause')
-      }
+      video.trigger('pause')
     }
   })
 })
