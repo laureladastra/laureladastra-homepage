@@ -3,6 +3,21 @@ $(function () {
     $body = $('body'),
     $agent = navigator.userAgent
 
+  function isInApp() {
+    const agent = $agent || navigator.vendor || window.opera
+    return (
+      agent.indexOf('FBAN') > -1 ||
+      agent.indexOf('FBAV') > -1 ||
+      agent.indexOf('Messenger') > -1 ||
+      agent.indexOf('Line') > -1 ||
+      agent.indexOf('MicroMessenger') > -1 ||
+      agent.indexOf('Puffin') > -1 ||
+      agent.indexOf('MiuiBrowser') > -1 ||
+      agent.indexOf('Twitter') > -1 ||
+      agent.indexOf('Instagram') > -1
+    )
+  }
+
   // Breakpoints.
   breakpoints({
     default: ['1681px', null],
@@ -76,7 +91,7 @@ $(function () {
   // FIXME patch is limited to iOS
   // additional testing required to check compatibility with AndroidOS/Windows Mobile
 
-  if (!/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test($agent)) {
+  if (!isInApp()) {
     const videos = $('#facts video')
     for (let i = 0; i < videos.length; i++) {
       $(videos[i]).prop('autoplay', true)
