@@ -235,7 +235,7 @@ $(function () {
     // Revert default color for links in #icon
 
     if ($this.is('a') && $this.hasClass('icon')) {
-      $this.blur()
+      $this.trigger('blur')
     }
 
     if (width < 992) {
