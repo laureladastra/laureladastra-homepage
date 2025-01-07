@@ -318,6 +318,9 @@ hr {
   &:hover {
     color: $gray-700 !important;
   }
+  &:focus {
+    outline: 0 !important;
+  }
 }
 
 #appointments-content a {

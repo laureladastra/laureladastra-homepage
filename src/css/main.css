@@ -13254,6 +13254,9 @@ hr.major {
 #socials li a:hover {
   color: #495057 !important;
 }
+#socials li a:focus {
+  outline: 0 !important;
+}
 
 #appointments-content a {
   font-family: "Raleway", Helvetica, sans-serif;
