@@ -38,7 +38,7 @@ The project is a generic HTML front-end with minimal dependencies (`Bootstrap 5.
 ├─ img
 ├─ js
 ├─ sass
-├─ webfonts
+├─ fonts
 ├─ index.html
 ```
 

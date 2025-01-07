@@ -4,7 +4,7 @@ eslint.config.mjs
 # ignore project folders
 build
 node_modules
-webfonts
+fonts
 src-backup
 release/pipelines
 vendors

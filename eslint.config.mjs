@@ -21,7 +21,7 @@ export default [
   {
     ignores: [
       'build',
-      '**/webfonts/*',
+      '**/fonts/*',
       '**/vendors/*',
       '**/*.min.js',
       '**/util.js',
