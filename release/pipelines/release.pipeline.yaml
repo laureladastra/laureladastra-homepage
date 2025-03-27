@@ -92,7 +92,8 @@ stages:
                 }
 
                 echo "##[command]az resource list --resource-group ***"
-                $resources = (az resource list --resource-group $(resourceGroup) | ConvertFrom-Json)
+                $resources = @()
+                $resources += (az resource list --resource-group $(resourceGroup) | ConvertFrom-Json)
                 $resources += (az group show --name $(resourceGroup) | ConvertFrom-Json)
                 foreach ($item in $resources) {
                   az tag create --resource-id $($item.id) --tags `
