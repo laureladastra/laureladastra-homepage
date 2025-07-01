@@ -46,7 +46,7 @@ Everything is centrally versioned and packaged. The website is hosted on Microso
 
 ### Development workflow
 
-You can start developing from the `html/src` folder while running:
+You can start developing from the `src` folder while running:
 
 ```bash
 npm run watch
