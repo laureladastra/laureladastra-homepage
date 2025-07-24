@@ -1,7 +1,12 @@
 {
   "name": "laureladastra.com",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
+  "packageManager": "yarn@4.9.1",
+  "engines": {
+    "npm": "^10.0.0",
+    "node": "^22.0.0"
+  },
   "scripts": {
     "audit": "npm audit -audit-level=critical -json",
     "watch": "npx sass --watch ./src/sass/main.scss ./src/css/main.css --quiet",

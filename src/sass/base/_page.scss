@@ -32,7 +32,7 @@ body {
 }
 
 // Ensures page width is always >=320px.
-@include breakpoint('<=xsmall') {
+@include breakpoint("<=xsmall") {
   html,
   body {
     min-width: 320px;
@@ -64,8 +64,8 @@ body {
     *,
     *:before,
     *:after {
-      @include vendor('animation', 'none !important');
-      @include vendor('transition', 'none !important');
+      @include vendor("animation", "none !important");
+      @include vendor("transition", "none !important");
     }
   }
 }
@@ -75,15 +75,15 @@ body {
 section {
   scroll-margin-top: 110px;
 
-  @include breakpoint(('<=medium')) {
+  @include breakpoint(("<=medium")) {
     scroll-margin-top: 50px;
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     scroll-margin-top: 50px;
   }
 
-  @include breakpoint('<=xxxsmall') {
+  @include breakpoint("<=xxxsmall") {
     scroll-margin-top: 15px;
   }
 }
@@ -123,7 +123,7 @@ section {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 3rem;
-  content: '';
+  content: "";
   cursor: pointer;
   display: block;
   height: 4rem;
@@ -149,7 +149,7 @@ section {
   overflow-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     max-width: 88%;
   }
 }
@@ -163,7 +163,7 @@ section {
     text-align: center;
     font-size: 3rem;
 
-    @include breakpoint('<=xxxsmall') {
+    @include breakpoint("<=xxxsmall") {
       text-align: left;
       font-size: 1.5rem;
     }
@@ -196,7 +196,7 @@ section {
 .modal-title {
   font-size: 1.1rem;
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     font-size: 1.2rem;
   }
 }
@@ -211,6 +211,6 @@ section {
 
 #navbarNav {
   // FIXME navbar cannot be scrolled in this viewport size
-  @include breakpoint('<=xxxsmall') {
+  @include breakpoint("<=xxxsmall") {
   }
 }

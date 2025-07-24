@@ -7,6 +7,16 @@ release/templates/*parameters.json
 # Ignore VSCode configuration files
 .vscode
 
+# ignore IDE - VSCode related settings
+
+.vscode
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+jsconfig.json
+
+
 # Logs
 logs
 *.log
@@ -67,6 +77,14 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+# Most yarn files, including the cache
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
+
 # dotenv environment variables file
 .env
 .env.test
@@ -107,9 +125,8 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 
-# Apple files
+# ignore local OS files
+.DS_Store
+Thumbs.db
 *.icloud
-*.DS_Store
-
-#Windows files
-*Thumbs.db
+*.nosync

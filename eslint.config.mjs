@@ -1,12 +1,12 @@
-import html from 'eslint-plugin-html'
-import jquery from 'eslint-plugin-jquery'
-import prettier from 'eslint-plugin-prettier'
-import globals from 'globals'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
-import { includeIgnoreFile } from '@eslint/compat'
+import html from "eslint-plugin-html"
+import jquery from "eslint-plugin-jquery"
+import prettier from "eslint-plugin-prettier"
+import globals from "globals"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+import js from "@eslint/js"
+import { FlatCompat } from "@eslint/eslintrc"
+import { includeIgnoreFile } from "@eslint/compat"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -15,25 +15,23 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
   allConfig: js.configs.all
 })
-const gitignorePath = path.resolve(__dirname, '.gitignore')
+const gitignorePath = path.resolve(__dirname, ".gitignore")
 
 export default [
   {
     ignores: [
-      'build',
-      '**/fonts/*',
-      '**/vendors/*',
-      '**/*.min.js',
-      '**/util.js',
-      '**/build/',
-      '**/modules/**/*.js',
-      '**/Gruntfile.js',
-      'eslint.config.mjs',
-      'release'
+      "build",
+      "**/fonts/*",
+      "**/vendors/*",
+      "**/*.min.js",
+      "**/util.js",
+      "**/build/",
+      "**/modules/**/*.js",
+      "release"
     ]
   },
   includeIgnoreFile(gitignorePath),
-  ...compat.extends('eslint:recommended', 'plugin:prettier/recommended'),
+  ...compat.extends("eslint:recommended", "plugin:prettier/recommended"),
   {
     plugins: {
       html,
@@ -48,37 +46,48 @@ export default [
         ...globals.jquery
       },
 
-      ecmaVersion: 2021,
-      sourceType: 'script'
+      ecmaVersion: 2022,
+      sourceType: "script"
     },
 
     rules: {
-      'comma-dangle': 0,
+      "comma-dangle": 0,
 
-      'prettier/prettier': [
-        'error',
+      "prettier/prettier": [
+        "error",
         {
           htmlWhitespaceSensitivity: "ignore",
           vueIndentScriptAndStyle: false,
-          trailingComma: 'none',
+          trailingComma: "none",
           tabWidth: 2,
           printWidth: 80,
           semi: false,
-          singleQuote: true,
+          singleQuote: false,
 
           overrides: [
             {
-              files: ['**/*.css'],
-
+              files: ["**/*.scss"],
+              options: {
+                semi: true
+              }
+            },
+            {
+              files: ["**/*.yaml"],
               options: {
                 singleQuote: false
+              }
+            },
+            {
+              files: "**/*.ps1",
+              options: {
+                parser: "powershell"
               }
             }
           ]
         }
       ],
 
-      'no-undef': 'off'
+      "no-undef": "off"
     }
   }
 ]

@@ -1,6 +1,3 @@
-# ignore config files
-eslint.config.mjs
-
 # ignore project folders
 build
 node_modules

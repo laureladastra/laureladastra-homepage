@@ -4,13 +4,13 @@
   "tabWidth": 2,
   "printWidth": 80,
   "semi": false,
-  "singleQuote": true,
+  "singleQuote": false,
   "htmlWhitespaceSensitivity": "ignore",
   "overrides": [
     {
-      "files": ["**/*.css"],
+      "files": ["**/*.scss"],
       "options": {
-        "singleQuote": false
+        "semi": true
       }
     },
     {

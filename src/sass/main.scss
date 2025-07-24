@@ -1,14 +1,14 @@
-@import 'libs/vars';
-@import 'libs/functions';
-@import 'libs/mixins';
-@import 'libs/vendor';
-@import 'libs/breakpoints';
-@import 'libs/html-grid';
-@import 'fontawesome-all.min.css';
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,300i,600i,700i|Raleway:600,800');
+@import "libs/vars";
+@import "libs/functions";
+@import "libs/mixins";
+@import "libs/vendor";
+@import "libs/breakpoints";
+@import "libs/html-grid";
+@import "fontawesome-all.min.css";
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,300i,600i,700i|Raleway:600,800");
 
-@import '../../node_modules/bootstrap/scss/functions';
-@import '../../node_modules/bootstrap/scss/variables';
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
 
 // Breakpoints.
 
@@ -65,33 +65,35 @@ $success: #ff8ac4;
 $theme-colors: map-merge(
   $theme-colors,
   (
-    'primary': $primary,
-    'success': $success
+    "primary": $primary,
+    "success": $success
   )
 );
 
+$modal-content-color: #fff;
+
 // Base.
-@import '../../node_modules/bootstrap/scss/bootstrap';
-@import 'base/reset';
-@import 'base/page';
-@import 'base/typography';
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "base/reset";
+@import "base/page";
+@import "base/typography";
 
 // Component.
 
-@import 'components/row';
-@import 'components/box';
-@import 'components/button';
-@import 'components/form';
-@import 'components/icon';
-@import 'components/image';
-@import 'components/list';
-@import 'components/actions';
-@import 'components/icons';
-@import 'components/table';
-@import 'components/arrow';
-@import 'components/gallery';
-@import 'components/feature-icons';
+@import "components/row";
+@import "components/box";
+@import "components/button";
+@import "components/form";
+@import "components/icon";
+@import "components/image";
+@import "components/list";
+@import "components/actions";
+@import "components/icons";
+@import "components/table";
+@import "components/arrow";
+@import "components/gallery";
+@import "components/feature-icons";
 
 // Layout.
 
-@import 'layout/wrapper';
+@import "layout/wrapper";

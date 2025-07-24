@@ -3,13 +3,13 @@ module.exports = function (grunt) {
   // configurations and task registrations dynamically.
   let includeAll
   try {
-    includeAll = require('include-all')
-  } catch (e0) {
-    console.error('Could not find `include-all` module.')
-    console.error('Skipping grunt tasks...')
-    console.error('To fix this, please run:')
-    console.error('npm install include-all --save-dev')
-    console.error()
+    includeAll = require("include-all")
+  } catch (err) {
+    console.error("Could not find `include-all` module.")
+    console.error("Skipping grunt tasks...")
+    console.error("To fix this, please run:")
+    console.error("npm install include-all --save-dev")
+    console.error(err)
   }
 
   /**
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
   function loadTasks(path) {
     return (
       includeAll({
-        dirname: require('path').resolve(__dirname, path),
+        dirname: require("path").resolve(__dirname, path),
         filter: /(.+)\.js$/
       }) || {}
     )
@@ -44,8 +44,8 @@ module.exports = function (grunt) {
   }
 
   // Load task functions
-  const taskConfigurations = loadTasks('./tasks/config')
-  const registerDefinitions = loadTasks('./tasks/register')
+  const taskConfigurations = loadTasks("./tasks/config")
+  const registerDefinitions = loadTasks("./tasks/register")
 
   // Run task functions to configure Grunt.
   invokeConfigFn(taskConfigurations)
