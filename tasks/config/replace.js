@@ -8,7 +8,7 @@ module.exports = function (grunt) {
       replacements: [
         {
           from: "../node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-          to: "js/bootstrap.bundle.js"
+          to: "js/vendors/bootstrap.bundle.js"
         },
         {
           from: ".js",

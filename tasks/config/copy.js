@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         {
           expand: true,
           cwd: "src",
-          src: ["**", "!sass/**", "!img/psd/**"],
+          src: ["**", "!sass/**", "!img/psd/**", "!js/**/*.js"],
           dest: "build/"
         },
         {
@@ -17,7 +17,7 @@ module.exports = function (grunt) {
           src: ["bootstrap/dist/js/bootstrap.bundle.js"],
           flatten: true,
           filter: "isFile",
-          dest: "build/js/"
+          dest: "build/js/vendors"
         }
       ]
     }

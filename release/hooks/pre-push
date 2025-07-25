@@ -3,7 +3,7 @@
 $htmlFolder = "$(Get-Location -ErrorAction Stop)/"
 
 function Get-Vulnerabilities {
-  $results = (npm run audit --silent | ConvertFrom-Json -AsHashtable).vulnerabilities
+  $results = (yarn run audit --silent | ConvertFrom-Json -AsHashtable).vulnerabilities
   $criticalVulnerabilities = @()
   Write-Host
   @"
@@ -31,7 +31,7 @@ function Get-CodeQuality {
 *                         check code quality (eslint)                          *
 ********************************************************************************
 "@
-  $result = (Invoke-Expression -Command "npm run --silent check -- -f=json" | ConvertFrom-Json)
+  $result = (Invoke-Expression -Command "yarn --silent run lint -f=json" | ConvertFrom-Json)
   $errors = @()
   $errorCount = $null
 
@@ -43,13 +43,13 @@ function Get-CodeQuality {
 
   $errorCount = $errors.Count
 
-  if ($errorCount -gt 0)  {
+  if ($errorCount -gt 0) {
     for ($i = 0; $i -lt $errorCount.length; $i++) {
       Write-Warning -Message "Path: $($errors[$i].filePath)`nMessage: $($errors[$i].messages | ConvertTo-Json -Depth 10 -Compress)"
     }
     throw  "ESlint exited with $($errorCount) problem(s)"
   }
-  Write-Host "done running 'npm run check'"
+  Write-Host "done running 'npm run lint'"
 }
 
 try {
