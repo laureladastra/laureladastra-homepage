@@ -1,6 +1,6 @@
 All Rights Reserved
 
-Copyright (c) 2024 Quantaleap BV
+Copyright (c) 2025 Quantaleap B.V.
 
 Created by Laure Ladastra
 

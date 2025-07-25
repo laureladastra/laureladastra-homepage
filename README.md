@@ -4,7 +4,7 @@ This project contains all the resources that support [laureladastra.com](https:/
 
 | Topic               | Status                                                                                                                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Application Version | [<img src="https://img.shields.io/badge/version-1.0.0-blue.svg">](html/package.json)                                                                                                     |
+| Application Version | [<img src="https://img.shields.io/badge/version-1.1.0-blue.svg">](html/package.json)                                                                                                     |
 | Build Pipeline      | ![Azure DevOps builds](https://img.shields.io/azure-devops/build/quantaleap/Product%20Development/49?label=laureladastra.homepage-html)                                                  |
 | Release Pipeline    | ![Azure DevOps builds](https://img.shields.io/azure-devops/build/quantaleap/6206cff7-06ac-401d-988d-bf459fd9dedb/50?label=laureladastra.homepage)                                        |
 | Website             | ![Website](https://img.shields.io/website?down_message=down&label=development%20&up_message=up&url=https%3A%2F%2Fwonderful-grass-0ec289e03-development.westeurope.4.azurestaticapps.net) |
@@ -17,7 +17,7 @@ This project contains all the resources that support [laureladastra.com](https:/
 The following software packages are required to contribute to this project:
 
 - Node.js/NPM version `>=22.3.0` and `>=10.8.1`
-- PowerShell Core version `>=7.2.7`
+- PowerShell Core version `>=7.5.2`
 
 Install the following software to get started with contributing:
 
@@ -33,13 +33,12 @@ Install the required software and run the installation script at `release/hooks/
 The project is a generic HTML front-end with minimal dependencies (`Bootstrap 5.0` & `jQuery`) + SASS for styling:
 
 ```markdown
-*
-├─ css
-├─ img
-├─ js
-├─ sass
-├─ fonts
-├─ index.html
+- ├─ css
+  ├─ img
+  ├─ js
+  ├─ sass
+  ├─ fonts
+  ├─ index.html
 ```
 
 Everything is centrally versioned and packaged. The website is hosted on Microsoft Azure/Static Web Apps.
