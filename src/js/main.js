@@ -333,4 +333,10 @@ $(function () {
       video.trigger("pause")
     }
   })
+
+  // Random sort (excluding Steve) for inspiration items
+
+  $("#inspiration-badge").on("click", function () {
+    $("#inspiration").children().slice(1).shuffle()
+  })
 })
