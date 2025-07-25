@@ -1,23 +1,23 @@
-@import '../../../node_modules/bootstrap/scss/variables';
+@import "../../../node_modules/bootstrap/scss/variables";
 
 /* Typography */
 
 html {
   font-size: 18pt;
 
-  @include breakpoint('<=xlarge') {
+  @include breakpoint("<=xlarge") {
     font-size: 13pt;
   }
 
-  @include breakpoint('<=medium') {
+  @include breakpoint("<=medium") {
     font-size: 14pt;
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     font-size: 12pt;
   }
 
-  @include breakpoint('<=xsmall') {
+  @include breakpoint("<=xsmall") {
     font-size: 11pt;
   }
 }
@@ -38,15 +38,15 @@ textarea {
   letter-spacing: _font(kerning);
   line-height: 2;
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     font-size: 1.2rem;
   }
 }
 
 a {
   @include vendor(
-    'transition',
-    'border-bottom-color #{_duration(transition)} ease-in-out'
+    "transition",
+    "border-bottom-color #{_duration(transition)} ease-in-out"
   );
   text-decoration: none;
   color: $secondary;
@@ -130,7 +130,7 @@ h6 {
   font-size: 0.625rem;
 }
 
-@include breakpoint('<=small') {
+@include breakpoint("<=small") {
   h1 {
     font-size: 4.5rem;
     line-height: 1.1;
@@ -154,7 +154,7 @@ h6 {
   }
 }
 
-@include breakpoint('<=xxsmall') {
+@include breakpoint("<=xxsmall") {
   h1 {
     font-size: 3.75rem;
   }
@@ -229,7 +229,7 @@ hr {
     margin: (_size(element-margin) * 2.5) 0;
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     &.major {
       margin: (_size(element-margin) * 1.5) 0;
     }
@@ -242,32 +242,32 @@ hr {
   height: 50px;
   width: 200px;
 
-  @include breakpoint('<=medium') {
+  @include breakpoint("<=medium") {
     @media (orientation: landscape) {
       margin-left: 2rem;
       width: 275px;
     }
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     @media (orientation: landscape) {
       margin-left: 0;
     }
   }
 
-  @include breakpoint('<=xsmall') {
+  @include breakpoint("<=xsmall") {
     width: 185px;
   }
 
-  @include breakpoint('<=xxsmall') {
+  @include breakpoint("<=xxsmall") {
     width: 185px;
   }
 
-  @include breakpoint('<=xxxsmall') {
+  @include breakpoint("<=xxxsmall") {
     width: 110px;
   }
 
-  @include breakpoint('<=xxxxsmall') {
+  @include breakpoint("<=xxxxsmall") {
     visibility: hidden;
   }
 }
@@ -283,21 +283,21 @@ hr {
 }
 
 .navbar-brand {
-  @include breakpoint('<=xxxsmall') {
+  @include breakpoint("<=xxxsmall") {
     display: none;
   }
 
-  @include breakpoint('<=xxxxsmall') {
+  @include breakpoint("<=xxxxsmall") {
     display: none;
   }
 }
 
 #navbarNav > ul > li > a {
-  @include breakpoint('<=medium') {
+  @include breakpoint("<=medium") {
     padding-left: 1rem;
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     padding-left: 1rem;
   }
 }
@@ -340,7 +340,7 @@ hr {
 
 .badge-text {
   font-size: 1.3rem;
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     font-size: 1.2rem;
   }
 }

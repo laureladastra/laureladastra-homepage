@@ -14,8 +14,8 @@ ul.icons {
 
     .icon {
       @include vendor(
-        'transition',
-        'background-color #{_duration(transition)} ease-in-out'
+        "transition",
+        "background-color #{_duration(transition)} ease-in-out"
       );
       width: 2.25rem;
       height: 2.25rem;

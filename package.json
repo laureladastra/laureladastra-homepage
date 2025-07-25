@@ -11,9 +11,9 @@
     "audit": "npm audit -audit-level=critical -json",
     "watch": "npx sass --watch ./src/sass/main.scss ./src/css/main.css --quiet",
     "build": "npx sass ./src/sass/main.scss ./src/css/main.css --quiet && npx grunt build",
-    "check": "npx eslint --no-warn-ignored",
-    "format": "npx prettier --write .",
-    "pester": "pwsh -ExecutionPolicy Unrestricted -Command \"Invoke-Pester './test -Show All\""
+    "lint": "npx eslint --no-warn-ignored",
+    "lint-ci": "npx eslint -f=\"junit\" --no-warn-ignored > ./test/results/eslint.qa.results.xml",
+    "format": "npx prettier --write ."
   },
   "author": "Laure Ladastra",
   "license": "UNLICENSED",
@@ -22,6 +22,7 @@
     "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
+    "@popperjs/core": "^2.11.8",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-formatter-junit": "^8.40.0",

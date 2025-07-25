@@ -42,7 +42,7 @@ ul.feature-icons {
     }
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     margin: 0 0 (_size(element-margin) * 1.5) 0;
 
     li {

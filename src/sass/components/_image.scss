@@ -11,7 +11,7 @@
 
   &[data-position] {
     img {
-      @include vendor('object-fit', 'cover');
+      @include vendor("object-fit", "cover");
       display: block;
       position: absolute;
       top: 0;
@@ -21,81 +21,81 @@
     }
   }
 
-  &[data-position='top left'] {
+  &[data-position="top left"] {
     img {
-      @include vendor('object-position', 'top left');
+      @include vendor("object-position", "top left");
     }
   }
 
-  &[data-position='top'] {
+  &[data-position="top"] {
     img {
-      @include vendor('object-position', 'top');
+      @include vendor("object-position", "top");
     }
   }
 
-  &[data-position='top right'] {
+  &[data-position="top right"] {
     img {
-      @include vendor('object-position', 'top right');
+      @include vendor("object-position", "top right");
     }
   }
 
-  &[data-position='right'] {
+  &[data-position="right"] {
     img {
-      @include vendor('object-position', 'right');
+      @include vendor("object-position", "right");
     }
   }
 
-  &[data-position='bottom right'] {
+  &[data-position="bottom right"] {
     img {
-      @include vendor('object-position', 'bottom right');
+      @include vendor("object-position", "bottom right");
     }
   }
 
-  &[data-position='bottom'] {
+  &[data-position="bottom"] {
     img {
-      @include vendor('object-position', 'bottom');
+      @include vendor("object-position", "bottom");
     }
   }
 
-  &[data-position='bottom left'] {
+  &[data-position="bottom left"] {
     img {
-      @include vendor('object-position', 'bottom left');
+      @include vendor("object-position", "bottom left");
     }
   }
 
-  &[data-position='left'] {
+  &[data-position="left"] {
     img {
-      @include vendor('object-position', 'left');
+      @include vendor("object-position", "left");
     }
   }
 
-  &[data-position='center'] {
+  &[data-position="center"] {
     img {
-      @include vendor('object-position', 'center');
+      @include vendor("object-position", "center");
     }
   }
 
-  &[data-position='25% 25%'] {
+  &[data-position="25% 25%"] {
     img {
-      @include vendor('object-position', '25% 25%');
+      @include vendor("object-position", "25% 25%");
     }
   }
 
-  &[data-position='75% 25%'] {
+  &[data-position="75% 25%"] {
     img {
-      @include vendor('object-position', '75% 25%');
+      @include vendor("object-position", "75% 25%");
     }
   }
 
-  &[data-position='75% 75%'] {
+  &[data-position="75% 75%"] {
     img {
-      @include vendor('object-position', '75% 75%');
+      @include vendor("object-position", "75% 75%");
     }
   }
 
-  &[data-position='25% 75%'] {
+  &[data-position="25% 75%"] {
     img {
-      @include vendor('object-position', '25% 75%');
+      @include vendor("object-position", "25% 75%");
     }
   }
 

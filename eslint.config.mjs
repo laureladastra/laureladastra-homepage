@@ -24,10 +24,12 @@ export default [
       "**/fonts/*",
       "**/vendors/*",
       "**/*.min.js",
-      "**/util.js",
+      "!**/util.js",
       "**/build/",
       "**/modules/**/*.js",
-      "release"
+      "release",
+      ".yarn",
+      "node_modules"
     ]
   },
   includeIgnoreFile(gitignorePath),
@@ -47,7 +49,7 @@ export default [
       },
 
       ecmaVersion: 2022,
-      sourceType: "script"
+      sourceType: "module"
     },
 
     rules: {
@@ -63,7 +65,6 @@ export default [
           printWidth: 80,
           semi: false,
           singleQuote: false,
-
           overrides: [
             {
               files: ["**/*.scss"],
@@ -86,7 +87,6 @@ export default [
           ]
         }
       ],
-
       "no-undef": "off"
     }
   }

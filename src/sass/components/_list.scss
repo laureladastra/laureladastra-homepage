@@ -60,7 +60,7 @@ ul {
     }
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     &.items {
       > li {
         margin: 0 0 (_size(element-margin) * 1) 0;

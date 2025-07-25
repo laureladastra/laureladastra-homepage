@@ -3,11 +3,11 @@
 @mixin wrapper-pad($pad) {
   padding: 0 0 $pad 0;
 
-  @include breakpoint('<=large') {
+  @include breakpoint("<=large") {
     margin-bottom: 2rem;
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     margin-bottom: 1.5rem;
   }
 
@@ -61,7 +61,7 @@
           font-size: 5.85rem;
         }
 
-        @include breakpoint('<=medium') {
+        @include breakpoint("<=medium") {
           > * {
             width: 100%;
           }
@@ -80,7 +80,7 @@
           }
         }
 
-        @include breakpoint('<=small') {
+        @include breakpoint("<=small") {
           > h1 {
             width: _size(header-width);
             text-align: left;
@@ -92,7 +92,7 @@
           }
         }
 
-        @include breakpoint('<=xxsmall') {
+        @include breakpoint("<=xxsmall") {
           > h1 {
             width: _size(header-width);
             text-align: left;
@@ -100,7 +100,7 @@
           }
         }
 
-        @include breakpoint('<=xxxsmall') {
+        @include breakpoint("<=xxxsmall") {
           $width: 13rem;
           margin-top: -0.1rem;
 
@@ -150,7 +150,7 @@
     > .content {
       padding: ($pad * $tbFactor) $pad;
 
-      @include breakpoint('<=medium') {
+      @include breakpoint("<=medium") {
         padding: ($pad * $tbFactor) $pad 0 $pad;
       }
 
@@ -169,7 +169,7 @@
         padding: (($pad * 1.25) + 3rem) $pad ($pad * 1.25) $pad;
       }
 
-      @include breakpoint('<=xxsmall') {
+      @include breakpoint("<=xxsmall") {
         padding-top: 2rem;
       }
     }
@@ -189,7 +189,7 @@
     background-position: -50% 10%;
     background-repeat: repeat-y;
     background-size: 75% auto;
-    content: '';
+    content: "";
     display: block;
     height: 100%;
     left: 0;
@@ -202,7 +202,7 @@
   // Sections (all).
   section {
     display: grid;
-    grid-template-areas: 'header content' 'footer content';
+    grid-template-areas: "header content" "footer content";
     grid-template-columns: 50vw 50vw;
     grid-template-rows: 1fr;
 
@@ -298,7 +298,7 @@
           margin-left: auto;
         }
 
-        @include breakpoint('<=small') {
+        @include breakpoint("<=small") {
           margin-top: 15px;
         }
       }
@@ -313,14 +313,14 @@
   // Pad.
   @include wrapper-pad($pad);
 
-  @include breakpoint('<=large') {
+  @include breakpoint("<=large") {
     $pad: 4rem;
 
     // Pad.
     @include wrapper-pad($pad);
   }
 
-  @include breakpoint('<=medium') {
+  @include breakpoint("<=medium") {
     $pad: 4rem;
 
     padding: 0;
@@ -332,7 +332,7 @@
 
     // Sections (all).
     section {
-      grid-template-areas: 'header' 'content' 'footer';
+      grid-template-areas: "header" "content" "footer";
       grid-template-columns: 1fr;
       grid-template-rows: 3fr;
 
@@ -458,7 +458,7 @@
     @include wrapper-pad-portrait($pad);
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     $pad: 2rem;
     padding: 0 0 ($pad * 3) 0;
 
@@ -479,7 +479,7 @@
     }
   }
 
-  @include breakpoint('<=xxsmall') {
+  @include breakpoint("<=xxsmall") {
     $pad: 1.5rem;
     padding-bottom: $pad;
 
@@ -554,7 +554,7 @@ body.is-mobile {
         }
       }
 
-      @include breakpoint('<=large') {
+      @include breakpoint("<=large") {
         > header {
           > * {
             transition:
@@ -617,7 +617,7 @@ body.is-ie {
       }
     }
 
-    @include breakpoint('<=large') {
+    @include breakpoint("<=large") {
       $pad: 4rem;
 
       // Sections (all).
@@ -635,7 +635,7 @@ body.is-ie {
 .gallery {
   padding-bottom: 2rem;
 
-  @include breakpoint('small') {
+  @include breakpoint("small") {
     padding-bottom: 2rem;
     // margin-bottom: 0;
   }
@@ -650,15 +650,15 @@ body.is-ie {
 
 #intro > div {
   // FIXME remove additional bottom margin underneath video when cropping
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     margin-bottom: -12.5vh !important;
   }
 
-  @include breakpoint('<=xsmall') {
+  @include breakpoint("<=xsmall") {
     margin-bottom: -12.5vh !important;
   }
 
-  @include breakpoint('<=xxsmall') {
+  @include breakpoint("<=xxsmall") {
     margin-bottom: -12.5vh !important;
   }
 }
@@ -677,30 +677,30 @@ body.is-ie {
     min-width: 100%;
     min-height: 100%;
 
-    @include breakpoint('<=small') {
+    @include breakpoint("<=small") {
       bottom: -150%;
       top: -150%;
       left: -100%;
     }
 
-    @include breakpoint('<=xsmall') {
+    @include breakpoint("<=xsmall") {
       top: -170%;
       left: -125vw;
     }
 
-    @include breakpoint('<=xxsmall') {
+    @include breakpoint("<=xxsmall") {
       bottom: -170%;
       top: -170%;
       left: -130vw;
     }
 
-    @include breakpoint('<=xxxsmall') {
+    @include breakpoint("<=xxxsmall") {
       bottom: -150%;
       top: -170%;
       left: -130vw;
     }
 
-    @include breakpoint('<=xxxxsmall') {
+    @include breakpoint("<=xxxxsmall") {
       bottom: -150%;
       top: -170%;
       left: -130vw;
@@ -708,7 +708,7 @@ body.is-ie {
   }
 }
 
-@include breakpoint('<=medium') {
+@include breakpoint("<=medium") {
   #contact {
     > header {
       margin-bottom: 0;
@@ -727,7 +727,7 @@ body.is-ie {
   }
 }
 
-@include breakpoint('<=small') {
+@include breakpoint("<=small") {
   #appointments-content {
     header {
       margin-top: 0;
@@ -762,7 +762,7 @@ body.is-ie {
   }
 }
 
-@include breakpoint('<=xsmall') {
+@include breakpoint("<=xsmall") {
   #appointments-content {
     header {
       margin-top: 0;
@@ -777,7 +777,7 @@ body.is-ie {
   }
 }
 
-@include breakpoint('<=xxsmall') {
+@include breakpoint("<=xxsmall") {
   #appointments-content {
     header {
       margin-top: 0;
@@ -792,7 +792,7 @@ body.is-ie {
   }
 }
 
-@include breakpoint('<=xxxsmall') {
+@include breakpoint("<=xxxsmall") {
   #appointments-content {
     header {
       margin-top: 0;
@@ -807,7 +807,7 @@ body.is-ie {
   }
 }
 
-@include breakpoint('<=xxxxsmall') {
+@include breakpoint("<=xxxxsmall") {
   #appointments-content {
     header {
       margin-top: 0;

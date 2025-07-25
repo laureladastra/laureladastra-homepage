@@ -1,17 +1,17 @@
 /* Button */
 
-input[type='submit'],
-input[type='reset'],
-input[type='button'],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
 button,
 .button {
-  @include vendor('appearance', 'none');
+  @include vendor("appearance", "none");
   @include vendor(
-    'transition',
+    "transition",
     (
-      'background-color #{_duration(transition)} ease-in-out',
-      'box-shadow #{_duration(transition)} ease-in-out',
-      'color #{_duration(transition)} ease-in-out'
+      "background-color #{_duration(transition)} ease-in-out",
+      "box-shadow #{_duration(transition)} ease-in-out",
+      "color #{_duration(transition)} ease-in-out"
     )
   );
   background-color: transparent;
@@ -71,7 +71,7 @@ button,
 
   &.disabled,
   &:disabled {
-    @include vendor('pointer-events', 'none');
+    @include vendor("pointer-events", "none");
     opacity: 0.25;
   }
 
@@ -89,7 +89,7 @@ button,
     }
   }
 
-  @include breakpoint('<=small') {
+  @include breakpoint("<=small") {
     font-size: 0.7rem;
     height: (_size(element-height) * 1.1);
     line-height: (_size(element-height) * 1.1);
