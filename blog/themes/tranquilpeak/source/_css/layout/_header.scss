@@ -1,0 +1,123 @@
+#header {
+  display: block;
+  width: 100%;
+  height: map-get($header, height);
+  // sets the color of the header bar
+  background: #000000;
+  position: fixed;
+  top: 0;
+  // border:                      map-get($header, border);
+  color: #f3f3f3;
+  // used to animate the header on small screen with javascript
+  //@include prefix(transition, top 0.25s ease-in-out, 'webkit' 'moz' 'ms' 'o');
+  z-index: map-get($z-indexes, l-header);
+  // Sidebar animation
+  // Transition style (push)
+  transition: transform 0.25s ease-in-out;
+  -webkit-transition: -webkit-transform 0.25s ease-in-out;
+  // Eliminate any flickering of elements while they are in a state of being animated
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+
+  #btn-open-sidebar {
+    position: absolute;
+    // vertical center
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+  }
+  #btn-open-home {
+    position: absolute;
+    // vertical center
+    top: 35px;
+    left: 30px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  a > img {
+    margin-right: 10px;
+  }
+  .header-right-picture {
+    position: absolute;
+    // vertical center
+    top: 22.5px;
+    right: 25px;
+    display: flex;
+    // width: 30px;
+    height: 30px;
+    color: map-get($header, color);
+
+    .header-picture {
+      margin-right: 10px;
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+    }
+  }
+  .header-right-icon {
+    position: absolute;
+    // vertical center
+    top: 12.5px;
+    right: 20px;
+    color: map-get($header, color);
+  }
+  .header-title {
+    text-align: center;
+    font-size: $font-size-base;
+    // FIXME update nav to height used on main site
+    line-height: map-get($header, height);
+    margin: 0;
+
+    .header-title-link {
+      color: #f3f3f3;
+      font-weight: normal;
+
+      &:hover,
+      &:active {
+        color: darken(map-get($header, color), 10);
+        text-decoration: none;
+      }
+    }
+  }
+  .author-name {
+    padding-top: 5px;
+  }
+  // Class used to swipe to the top the header on small screen when the user scroll down
+  &.header-up {
+    @include prefix(
+      transform,
+      translate3d(0, -#{map-get($header, height)}, 0),
+      "webkit" "moz"
+    );
+  }
+  // Push the header from the size of the large sidebar
+  &[data-behavior="1"],
+  &[data-behavior="3"] {
+    @include header-pushed-lg;
+  }
+  // Push the header from the size of the medium sidebar
+  &[data-behavior="2"],
+  &[data-behavior="4"] {
+    @include header-pushed-md;
+  }
+}
+
+@media #{$small-and-down} {
+  #header {
+    .header-right-picture {
+      display: none;
+    }
+  }
+}
+
+@media #{$medium-and-up} {
+  #header {
+    // Hide header
+    &[data-behavior="1"],
+    &[data-behavior="2"] {
+      display: none;
+    }
+  }
+}

@@ -1,5 +1,8 @@
 # Ignore build and package resources
 build/
+public/
+assets/
+_bower_components
 
 # Ignore ARM parameter files
 release/templates/*parameters.json
@@ -127,7 +130,7 @@ __queuestorage__
 __azurite_db*__.json
 
 # ignore local OS files
-.DS_Store
-Thumbs.db
+*.DS_Store
+*Thumbs.db
 *.icloud
 *.nosync
