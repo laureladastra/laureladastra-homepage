@@ -110,7 +110,6 @@ jobs:
           }
 
           # build / sources
-          mkdir -p $(System.DefaultWorkingDirectory)/build/
           build_task
 
           # build /theme sources
@@ -127,7 +126,8 @@ jobs:
           echo "Cleaning staging directory"
           rm -rf $(Build.StagingDirectory)/*
           mkdir -p $directory
-          cp -v -r $(env_htmlFolder)/build/. $(env_htmlBlogFolder)/build/. $directory
+          cp -v -r $(env_htmlFolder)/build/. $directory
+          cp -v -r $(env_htmlBlogFolder)/build/. $directory/blog
         displayName: "Copy files"
         workingDirectory: $(env_htmlFolder)
       - task: PublishPipelineArtifact@1
