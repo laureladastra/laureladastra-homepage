@@ -134,3 +134,6 @@ __azurite_db*__.json
 *Thumbs.db
 *.icloud
 *.nosync
+
+# ignore hexo files
+db.json

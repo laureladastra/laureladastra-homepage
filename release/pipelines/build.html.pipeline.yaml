@@ -103,22 +103,24 @@ jobs:
     steps:
       - script: |
           export NODE_ENV=development
-          build_task() {
+          run_yarn() {
             corepack enable
             yarn install --silent
-            yarn run build
           }
 
           # build / sources
-          build_task
+          run_yarn
+          yarn run build
 
           # build /theme sources
           cd $(env_htmlBlogThemeFolder)
-          build_task
+          run_yarn
+          yarn run build
 
           # generate /blog sources
           cd $(env_htmlBlogFolder)
-          build_task
+          run_yarn
+          yarn run build-prod
         displayName: Build artifacts
         workingDirectory: $(env_htmlFolder)
       - script: |
