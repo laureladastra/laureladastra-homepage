@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "npx grunt -- default",
-    "build": "npx grunt -- buildProd"
+    "build": "npx grunt build"
   },
   "repository": {
     "type": "git",
