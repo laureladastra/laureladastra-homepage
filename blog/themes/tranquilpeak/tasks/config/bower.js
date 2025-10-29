@@ -25,7 +25,7 @@ module.exports = function (grunt) {
             ]
           },
           fontawesome: {
-            files: ["css/all.css", "js/all.js"]
+            files: ["css/all.css", "js/all.js", "webfonts/*"]
           }
         }
       }

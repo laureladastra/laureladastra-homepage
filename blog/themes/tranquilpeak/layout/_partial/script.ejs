@@ -2,7 +2,7 @@
 <%- js('assets/js/jquery.js') %>
 <%- js('assets/js/jquery.fancybox.js') %>
 <%- js('assets/js/jquery.fancybox-thumbs.js') %>
-<%- js('assets/js/all.js') %>
+<%- js('assets/js/fontawesome-all.js') %>
 <%- js('assets/js/tranquilpeak.js') %>
 <!--SCRIPTS END-->
 <% if (post.comments) { %>
@@ -10,7 +10,6 @@
         <script>
              var disqus_config = function () {
                  this.page.url = '<%= post.permalink %>';
-                 console.log(this.page.url);
                  <% if (post.disqusIdentifier) { %>
                     this.page.identifier = '<%= post.disqusIdentifier %>';
                  <% } else { %>

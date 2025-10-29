@@ -47,6 +47,21 @@ module.exports = function (grunt) {
           to: "url('../fonts/"
         }
       ]
+    },
+    // Modify url of fonts in fontawesome-all.css to resolve fonts.
+    cssFontAwesome: {
+      overwrite: true,
+      src: ["source/assets/css/fontawesome-all.css"],
+      replacements: [
+        {
+          from: /url\('[./]+webfonts\//g,
+          to: "url('../fonts/"
+        },
+        {
+          from: /url\("[./]+webfonts\//g,
+          to: 'url("../fonts/'
+        }
+      ]
     }
   })
 
