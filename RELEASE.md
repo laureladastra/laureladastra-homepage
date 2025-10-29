@@ -2,11 +2,12 @@
 
 ## Features
 
-- upgrade to Node `^22.0.0` + Yarn implementation
-- upgrade to ESLint `^9.17.0`
-- migrated Exchange Online signature icons
-- generic content updates
+- added migrated [Hexo](https://hexo.io) blog
+- upgrade legacy Node `13.0.0` to `^22.0.0` + Yarn for blog
+- aligned styles used in blog with branding from `/`
 
 ## Bugs
 
-- patched high + critical NPM vulnerabilities
+- bumped outdated `grunt-*` libs in `themes/tranquilpeak`
+- swapped `node-sass` for `sass` due to EOL and incompatibility with Apple Sillicon.
+- swapped `rand-token` for native `crypto` 
