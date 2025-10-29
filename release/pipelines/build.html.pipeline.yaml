@@ -115,12 +115,12 @@ jobs:
           # build /theme sources
           cd $(env_htmlBlogThemeFolder)
           run_yarn
-          yarn run build
+          yarn run build-prod
 
           # generate /blog sources
           cd $(env_htmlBlogFolder)
           run_yarn
-          yarn run build-prod
+          yarn run build
         displayName: Build artifacts
         workingDirectory: $(env_htmlFolder)
       - script: |
