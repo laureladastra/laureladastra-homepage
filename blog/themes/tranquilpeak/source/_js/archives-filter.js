@@ -44,7 +44,7 @@
     getSearch: function () {
       return this.$searchInput
         .val()
-        .replace(/([\/|.|-])/g, "")
+        .replace(/([/|.|-])/g, "")
         .toLowerCase()
     },
 

@@ -5,11 +5,12 @@ module.exports = function (grunt) {
 
   try {
     includeAll = require("include-all")
-  } catch (e0) {
+  } catch (err) {
     console.error("Could not find `include-all` module.")
     console.error("Skipping grunt tasks...")
     console.error("To fix this, please run:")
     console.error("npm install include-all --save-dev")
+    console.error(err)
     console.error()
   }
 

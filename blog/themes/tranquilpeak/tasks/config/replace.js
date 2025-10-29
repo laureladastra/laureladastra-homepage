@@ -31,20 +31,20 @@ module.exports = function (grunt) {
       src: ["source/assets/css/tranquilpeak.css"],
       replacements: [
         {
-          from: /url\(\"[.\/]+_images\//,
-          to: 'url\(\"..\/images\/'
+          from: /url\("[./]+_images\//,
+          to: 'url("../images/'
         },
         {
-          from: /url\(\'[.\/]+_images\//,
-          to: "url\('..\/images\/"
+          from: /url\('[./]+_images\//,
+          to: "url('../images/"
         },
         {
-          from: /url\(\"[.\/]+_fonts\//,
-          to: 'url\(\"..\/fonts\/'
+          from: /url\("[./]+_fonts\//,
+          to: 'url("../fonts/'
         },
         {
-          from: /url\(\'[.\/]+_fonts\//,
-          to: "url\('..\/fonts\/"
+          from: /url\('[./]+_fonts\//,
+          to: "url('../fonts/"
         }
       ]
     }

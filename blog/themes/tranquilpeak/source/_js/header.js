@@ -23,7 +23,6 @@
      */
     run: function () {
       var self = this
-      var didScroll
 
       // Detect if the user is scrolling
       $(window).scroll(function () {
