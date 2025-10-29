@@ -9,6 +9,7 @@ module.exports = function (grunt) {
     "syncAssets",
     "replace:cssFancybox",
     "replace:cssTranquilpeak",
+    "replace:cssFontAwesome",
     "concat",
     "cssmin",
     "uglify",

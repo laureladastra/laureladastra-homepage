@@ -10,7 +10,6 @@
         <script>
              var disqus_config = function () {
                  this.page.url = '<%= post.permalink %>';
-                 console.log(this.page.url);
                  <% if (post.disqusIdentifier) { %>
                     this.page.identifier = '<%= post.disqusIdentifier %>';
                  <% } else { %>

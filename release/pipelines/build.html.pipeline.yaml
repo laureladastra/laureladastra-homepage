@@ -115,7 +115,7 @@ jobs:
           # build /theme sources
           cd $(env_htmlBlogThemeFolder)
           run_yarn
-          yarn run build-prod
+          yarn run build
 
           # generate /blog sources
           cd $(env_htmlBlogFolder)
