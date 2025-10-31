@@ -4,7 +4,7 @@ This project contains all the resources that support [laureladastra.com](https:/
 
 | Topic               | Status                                                                                                                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Application Version | [<img src="https://img.shields.io/badge/version-2.0.0-blue.svg">](html/package.json)                                                                                                     |
+| Application Version | [<img src="https://img.shields.io/badge/version-2.1.0-blue.svg">](html/package.json)                                                                                                     |
 | Build Pipeline      | ![Azure DevOps builds](https://img.shields.io/azure-devops/build/quantaleap/Product%20Development/49?label=laureladastra.homepage-html)                                                  |
 | Release Pipeline    | ![Azure DevOps builds](https://img.shields.io/azure-devops/build/quantaleap/6206cff7-06ac-401d-988d-bf459fd9dedb/50?label=laureladastra.homepage)                                        |
 | Website             | ![Website](https://img.shields.io/website?down_message=down&label=development%20&up_message=up&url=https%3A%2F%2Fwonderful-grass-0ec289e03-development.westeurope.4.azurestaticapps.net) |
@@ -22,6 +22,7 @@ The following software packages are required to contribute to this project:
 Install the following software to get started with contributing:
 
 - [Node.js/NPM](https://nodejs.org/en/)
+- [NVM](https://github.com/nvm-sh/nvm)
 - [PowerShell Core](https://github.com/PowerShell/PowerShell)
 
 ### Installation
@@ -30,25 +31,35 @@ Install the required software and run the installation script at `release/hooks/
 
 ### Project Structure
 
-The project is a generic HTML front-end with minimal dependencies (`Bootstrap 5.0` & `jQuery`) + SASS for styling:
+This workpace is organised as a monorepo where assets from two seperate projects are compiled into a single static website:
+
+| `/package.json`                                                                             | `/blog/.package.json` and `/blog/themes/tranquilpeak/.package.json`    |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| generic front-end with minimal dependencies (`Bootstrap 5.0` & `jQuery`) + SASS for styling | a [`Hexo`](https://hexo.io/) based blog that implements a custom theme |
+
+The following directory structure is adopted:
 
 ```markdown
-- ├─ css
-  ├─ img
-  ├─ js
-  ├─ sass
-  ├─ fonts
-  ├─ index.html
+├── blog (project 2 - blog site)
+│   ├── build
+│   ├── source
+│   ├── themes
+│   │   ├── package.json
+│   ├── package.json
+├── build
+├── src (project 1 - index site)
+│   ├── index.html
+└── package.json
 ```
 
-Everything is centrally versioned and packaged. The website is hosted on Microsoft Azure/Static Web Apps.
+The website is hosted on Microsoft Azure/Static Web Apps.
 
 ### Development workflow
 
 You can start developing from the `src` folder while running:
 
 ```bash
-npm run watch
+yarn run watch
 ```
 
 The NPM `watch` task will automatically compile SASS assets when files are updated.
@@ -56,35 +67,46 @@ The NPM `watch` task will automatically compile SASS assets when files are updat
 The `build` task can be used to compile the entire project. This will make the assets available from the `build` folder.
 
 ```bash
-npm run build
+yarn run build
 ```
+
+For the blog, the same workflow applies with the sole difference that `yarn run watch` is ran from `/blog/themes/` and `yarn run start` in a seperate prompt from `/blog` to start the web server. This will start the web server that comes packaged with [Hexo](https://hexo.io).
 
 ### Testing and building
 
 [NPM scripts](https://docs.npmjs.com/cli/v6/using-npm/scripts) are implemented to streamline test and build processes. All of the required scripts are referenced within `package.json`. They can be executed by running:
 
 ```bash
+# execute default build task from Grunt
+$ yarn run build
+
 # execute tool from 'devDependencies'
 $ npx run <command>
 ```
 
 The following areas are covered:
 
-| Tool      | Activity                              | Command        | Type     |
-| --------- | ------------------------------------- | -------------- | -------- |
-| ESLint    | Check code format                     | npm run check  | QA       |
-| Prettier  | Format code                           | npm run format | QA       |
-| NPM audit | Check vulnerabilities in NPM packages | npm audit      | Security |
-| Grunt     | Build project assets for production   | npm run build  | Build    |
+| Tool      | Activity                              | Command         | Type     |
+| --------- | ------------------------------------- | --------------- | -------- |
+| ESLint    | Check code format                     | yarn run check  | QA       |
+| Prettier  | Format code                           | yarn run format | QA       |
+| NPM audit | Check vulnerabilities in NPM packages | npm audit       | Security |
+| Grunt     | Build project assets for production   | yarn run build  | Build    |
 
 Build tasks can be ran seperately according to preference:
 
 ```bash
-# run build for different environments
-$ npx grunt <environment> <task>
+# execute entire build task from Grunt
+$ npx grunt <task>
 
-#example
-$ npx grunt build clean
+# example (i.e. production build)
+$ npx grunt -- buildProd
+
+# execute single task rom Grunt
+$ npx grunt -- <task_name>:<task_activity>
+
+# example
+$ npx grunt -- clean:folder
 ```
 
 When publishing the code, a git pre-push hook is implemented to govern code quality. The test and security scripts are executed during this process.

@@ -104,17 +104,17 @@
   }
 }
 
-@media #{$xsmall-and-down} {
+@media #{$small-only} {
   #header {
-    .header-right-picture {
+    .author-name {
       display: none;
     }
   }
 }
 
-@media #{$small-and-down} {
+@media #{$xsmall-and-down} {
   #header {
-    .author-name {
+    .header-right-section {
       display: none;
     }
   }
