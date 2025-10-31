@@ -104,9 +104,17 @@
   }
 }
 
-@media #{$small-and-down} {
+@media #{$xsmall-and-down} {
   #header {
     .header-right-picture {
+      display: none;
+    }
+  }
+}
+
+@media #{$small-and-down} {
+  #header {
+    .author-name {
       display: none;
     }
   }

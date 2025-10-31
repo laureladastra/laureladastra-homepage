@@ -1,7 +1,6 @@
 ---
 title: Machine in the Ghost (and the future)
 tags: []
-coverImage: "cover.jpg"
 categories: []
 date: 2016-11-24 10:02:00
 ---
@@ -21,4 +20,4 @@ Advancements in Computational Neuroscience make this statement more of a reality
 
 I will further elaborate on the scope of the project that I’m developing in following posts. In the meantime:<br><br>
 
-<center> <img src="gits.gif" width="480" height="259" allowFullScreen> </center>
+{% image fancybox center gits.gif %}

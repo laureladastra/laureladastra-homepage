@@ -312,6 +312,12 @@ hr {
   text-overflow: ellipsis;
 }
 
+#vision h2 {
+  @include breakpoint("<=xxsmall") {
+    padding-top: 1rem;
+  }
+}
+
 #socials li a {
   background-color: transparent;
   color: $white !important;

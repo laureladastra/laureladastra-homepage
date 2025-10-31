@@ -13257,6 +13257,12 @@ hr.major {
   text-overflow: ellipsis;
 }
 
+@media screen and (max-width: 360px) {
+  #vision h2, #vision .h2 {
+    padding-top: 1rem;
+  }
+}
+
 #socials li a {
   background-color: transparent;
   color: #fff !important;
