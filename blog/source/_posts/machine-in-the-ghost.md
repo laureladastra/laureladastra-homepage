@@ -1,7 +1,6 @@
 ---
 title: Machine in the Ghost (and the future)
 tags: []
-coverImage: "cover.jpg"
 categories: []
 date: 2016-11-24 10:02:00
 ---
