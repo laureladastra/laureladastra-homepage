@@ -10,4 +10,4 @@
 
 - bumped outdated `grunt-*` libs in `themes/tranquilpeak`
 - swapped `node-sass` for `sass` due to EOL and incompatibility with Apple Sillicon.
-- swapped `rand-token` for native `crypto` 
+- swapped `rand-token` for native `crypto`
