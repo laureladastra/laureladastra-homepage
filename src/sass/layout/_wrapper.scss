@@ -485,6 +485,16 @@
 
     // Pad.
     @include wrapper-pad-portrait($pad, 1.5);
+
+    #vision > header {
+      padding-top: 4rem;
+      margin-bottom: 0.6rem;
+
+      @include breakpoint("<=xxxsmall") {
+        padding-top: 2rem;
+        margin-bottom: 0.6rem;
+      }
+    }
   }
 }
 

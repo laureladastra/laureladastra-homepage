@@ -41,14 +41,14 @@ The following directory structure is adopted:
 
 ```markdown
 ├── blog (project 2 - blog site)
-│   ├── build
-│   ├── source
-│   ├── themes
-│   │   ├── package.json
-│   ├── package.json
+│ ├── build
+│ ├── source
+│ ├── themes
+│ │ ├── package.json
+│ ├── package.json
 ├── build
 ├── src (project 1 - index site)
-│   ├── index.html
+│ ├── index.html
 └── package.json
 ```
 

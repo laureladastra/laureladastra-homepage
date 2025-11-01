@@ -13257,12 +13257,6 @@ hr.major {
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 360px) {
-  #vision h2, #vision .h2 {
-    padding-top: 1rem;
-  }
-}
-
 #socials li a {
   background-color: transparent;
   color: #fff !important;
@@ -16117,6 +16111,18 @@ ul.feature-icons li:nth-child(1), ul.feature-icons li:nth-child(2) {
 @media screen and (max-width: 360px) and (max-width: 360px) {
   #wrapper > section.intro {
     padding-top: 2rem;
+  }
+}
+@media screen and (max-width: 360px) {
+  #wrapper #vision > header {
+    padding-top: 4rem;
+    margin-bottom: 0.6rem;
+  }
+}
+@media screen and (max-width: 360px) and (max-width: 224px) {
+  #wrapper #vision > header {
+    padding-top: 2rem;
+    margin-bottom: 0.6rem;
   }
 }
 
