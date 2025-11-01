@@ -1,6 +1,6 @@
 {
   "name": "laureladastra.com",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "index.js",
   "packageManager": "yarn@4.9.1",
   "engines": {
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "audit": "npm audit -audit-level=critical -json",
-    "watch": "npx sass --watch ./src/sass/main.scss ./src/css/main.css --quiet",
+    "watch": "npx sass --watch ./src/sass/main.scss ./src/css/main.css",
     "build": "npx sass ./src/sass/main.scss ./src/css/main.css --quiet && npx grunt build",
     "lint": "npx eslint --no-warn-ignored",
     "lint-ci": "npx eslint -f=\"junit\" --no-warn-ignored > ./test/results/eslint.qa.results.xml",
