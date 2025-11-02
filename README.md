@@ -4,7 +4,7 @@ This project contains all the resources that support [laureladastra.com](https:/
 
 | Topic               | Status                                                                                                                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Application Version | [<img src="https://img.shields.io/badge/version-2.1.0-blue.svg">](html/package.json)                                                                                                     |
+| Application Version | [<img src="https://img.shields.io/badge/version-2.1.1-blue.svg">](html/package.json)                                                                                                     |
 | Build Pipeline      | ![Azure DevOps builds](https://img.shields.io/azure-devops/build/quantaleap/Product%20Development/49?label=laureladastra.homepage-html)                                                  |
 | Release Pipeline    | ![Azure DevOps builds](https://img.shields.io/azure-devops/build/quantaleap/6206cff7-06ac-401d-988d-bf459fd9dedb/50?label=laureladastra.homepage)                                        |
 | Website             | ![Website](https://img.shields.io/website?down_message=down&label=development%20&up_message=up&url=https%3A%2F%2Fwonderful-grass-0ec289e03-development.westeurope.4.azurestaticapps.net) |
