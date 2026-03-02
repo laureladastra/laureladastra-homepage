@@ -71,6 +71,9 @@
     })();
 %>
 <head>
+    <!-- ANALYTICS TAGS -->
+    <%- partial('google-analytics') %>
+    <%- partial('baidu-analytics') %>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Laure Ladastra - Blog - Cloud Computing & AI Entrepreneur</title>
@@ -79,7 +82,7 @@
         <meta name="keywords" content="<%= keywords %>">
     <% } %>
     <% if (theme.favicon) { %>
-        <link rel="icon" href="<%= resolve_asset_url(theme.image_dir, theme.favicon) %>">
+        <link rel="icon" href="/blog/assets/images/<%= theme.favicon %>">
     <% } %>
     <% if ((config.feed) && (config.feed.path.length)) { %>
         <link rel="alternate" type="application/atom+xml" title="RSS" href="<%- url_for(config.feed.path) %>">
@@ -122,6 +125,4 @@
     <%- css('assets/css/fontawesome-all.css') %>
     <%- css('assets/css/tranquilpeak.css') %>
     <!--STYLES END-->
-    <%- partial('google-analytics') %>
-    <%- partial('baidu-analytics') %>
 </head>
